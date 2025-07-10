@@ -13,12 +13,14 @@ function App() {
   const currencyInfo = useCurrencyInfo(From);
 
   const options = Object.keys(currencyInfo)
+  console.log("Currency options:", options);
+  console.log("Currency info:", currencyInfo);
 
   const swap = () =>{
     setFrom(to);
     setTo(From);
-    setConvertedAmount(amount);
     setAmount(convertedAmount);
+    setConvertedAmount(amount);
   }
 
   const convert = () =>{
@@ -47,10 +49,9 @@ function App() {
                             label="From"
                             amount={amount}
                             currencyOption={options}
-                            onCurrencyChange={(currency)=>setAmount(amount)}
-                            selectCurrency = {From}
-
-                            
+                            onAmountChange={(amount)=>setAmount(amount)}
+                            selectCurrency={From}
+                            onCurrencyChange={(currency)=>setFrom(currency)}
                         />
                     </div>
                     <div className="relative w-full h-0.5">
@@ -67,10 +68,10 @@ function App() {
                             label="To"
                             amount={convertedAmount}
                             currencyOption={options}
+                            onAmountChange={(amount)=>setConvertedAmount(amount)}
+                            selectCurrency={to}
                             onCurrencyChange={(currency)=>setTo(currency)}
-                            selectCurrency = {From}
                             amountDisable={true}
-                            
                         />
                     </div>
                     <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
